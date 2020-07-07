@@ -1,13 +1,17 @@
 const socket = io();
 
+// Elements
 const input = document.querySelector('input');
-const locationBtn = document.getElementById('share-location');
+const locationBtn = document.getElementById('share-location-btn');
 const submitBtn = document.getElementById('submit-btn');
 const messages = document.getElementById('messages');
 
 // Templates
 const messageTempltae = document.getElementById('message-template').innerHTML;
 const locationTemplate = document.getElementById('location-template').innerHTML;
+
+// Query Strings
+const {username, room} = Qs.parse(location.search, {ignoreQueryPrefix: true})
 
 // Challenge 2
 socket.on('message', (message) => {
@@ -29,7 +33,7 @@ socket.on('locationMessage', (url) => {
 });
 
 submitBtn.addEventListener('click', getMessage);
-function getMessage() {
+function getMessage(e) {
   const message = document.getElementById('input-value').value;
   if (message) {
     socket.emit('sendMessage', message, (error) => {
@@ -40,6 +44,7 @@ function getMessage() {
     });
     input.value = '';
     input.focus();
+    e.preventDefault();
   }
   // console.log(message);
 
@@ -71,3 +76,5 @@ function shareLocation() {
     );
   });
 }
+
+socket.emit('join', {username, room});
