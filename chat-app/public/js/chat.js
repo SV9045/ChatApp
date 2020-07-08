@@ -16,6 +16,30 @@ const { username, room } = Qs.parse(location.search, {
   ignoreQueryPrefix: true
 });
 
+const autoScroll = () => {
+  // New Message Element
+  const newMessage = messages.lastElementChild;
+
+  // Height of the new message
+  const newMessageStyles = getComputedStyle(newMessage);
+  const newMessageMarginBottom = parseInt(newMessageStyles.marginBottom);
+  const newMessageHeight = newMessage.offsetHeight + newMessageMarginBottom;
+  // console.log(newMessageMarginBottom);
+
+  // Visible Height
+  const visibleHeight = messages.offsetHeight;
+
+  // Height of message container
+  const containerHeight = messages.scrollHeight;
+
+  // How far I have scrolled
+  const scrollOffset = messages.scrollTop + visibleHeight;
+
+  if(containerHeight - newMessageHeight <= scrollOffset) {
+    messages.scrollTop = messages.scrollHeight;
+  }
+}
+
 // Challenge 2
 socket.on('message', (message) => {
   console.log(message);
@@ -25,6 +49,7 @@ socket.on('message', (message) => {
     createdAt: moment(message.createdAt).format('MMMM Do, YYYY,h:mm A')
   });
   messages.insertAdjacentHTML('beforeend', html);
+  autoScroll();
 });
 
 socket.on('locationMessage', (url) => {
@@ -35,6 +60,7 @@ socket.on('locationMessage', (url) => {
     locatedAt: moment(url.createdAt).format('MMMM Do, YYYY,h:mm A')
   });
   messages.insertAdjacentHTML('beforeend', location);
+  autoScroll();
 });
 
 submitBtn.addEventListener('click', getMessage);

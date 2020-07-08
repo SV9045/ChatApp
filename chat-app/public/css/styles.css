@@ -110,6 +110,15 @@ h2{
 
 li{
   font-size: 1.6rem;
+  cursor: pointer;
+  text-align: center;
+  padding: 1rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+li:hover{
+  background-color: #2e2f31;
 }
 
 /* Chat styles */
@@ -180,10 +189,12 @@ li{
 /* Chat Sidebar Styles */
 
 .room-title {
-  font-weight: 400;
-  font-size: 22px;
+  font-weight: 700;
+  font-size: 32px;
   background: #2c2f3a;
   padding: 24px;
+  text-align: center;
+  text-transform: capitalize;
 }
 
 .list-title {
