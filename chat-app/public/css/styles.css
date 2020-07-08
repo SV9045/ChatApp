@@ -101,11 +101,15 @@ button#share-location-btn {
   background: #333744;
   width: 225px;
   overflow-y: auto;
-  transform: translate(-100%);
+  padding: 10px;
 }
 
-.show-sidebar{
-  transform: translate(0);
+h2{
+  font-size: 2rem;
+}
+
+li{
+  font-size: 1.6rem;
 }
 
 /* Chat styles */

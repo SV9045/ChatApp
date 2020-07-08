@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,regular,italic,600,600italic,700,700italic,800,800italic"
           rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha512-xA6Hp6oezhjd6LiLZynuukm80f8BoZ3OpcEYaqKoCV3HKQDrYjDE1Gu8ocxgxoXmwmSzM4iqPvCsOkQNiu41GA==" 
+          rel="stylesheet"
+          crossorigin="anonymous" />
     <link rel="icon" href="./img/favicon.png" />
     <link rel="stylesheet" href="./css/styles.css" />
     <title>Chat App</title>
@@ -17,11 +20,16 @@
           <label for="name">Display Name</label>
           <input type="text"
                  name="username"
-                 id=""
                  placeholder="Display Name"
+                 autocomplete="off"
                  required/>
+
           <label for="room">Room</label>
-          <input type="text" name="room" id="" placeholder="Room">
+          <input type="text" 
+                 name="room"
+                 placeholder="Room"
+                 autocomplete="off">
+
           <button type="submit">Join</button>
         </form>
       </div>

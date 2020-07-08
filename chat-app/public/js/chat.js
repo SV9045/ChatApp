@@ -5,18 +5,22 @@ const input = document.querySelector('input');
 const locationBtn = document.getElementById('share-location-btn');
 const submitBtn = document.getElementById('submit-btn');
 const messages = document.getElementById('messages');
+const sidebarTemplate = document.getElementById('sidebar-template').innerHTML;
 
 // Templates
 const messageTempltae = document.getElementById('message-template').innerHTML;
 const locationTemplate = document.getElementById('location-template').innerHTML;
 
 // Query Strings
-const {username, room} = Qs.parse(location.search, {ignoreQueryPrefix: true})
+const { username, room } = Qs.parse(location.search, {
+  ignoreQueryPrefix: true
+});
 
 // Challenge 2
 socket.on('message', (message) => {
   console.log(message);
   const html = Mustache.render(messageTempltae, {
+    username: message.username,
     message: message.text,
     createdAt: moment(message.createdAt).format('MMMM Do, YYYY,h:mm A')
   });
@@ -26,6 +30,7 @@ socket.on('message', (message) => {
 socket.on('locationMessage', (url) => {
   console.info(url);
   const location = Mustache.render(locationTemplate, {
+    username: url.username,
     url: url.url,
     locatedAt: moment(url.createdAt).format('MMMM Do, YYYY,h:mm A')
   });
@@ -77,4 +82,17 @@ function shareLocation() {
   });
 }
 
-socket.emit('join', {username, room});
+socket.on('roomData', ({ room, users}) => {
+  const html = Mustache.render(sidebarTemplate, {
+    room,
+    users
+  });
+  document.getElementById('sidebar').innerHTML = html;
+});
+
+socket.emit('join', { username, room }, (error) => {
+  if (error) {
+    alert(error);
+    location.href = '/';
+  }
+});
