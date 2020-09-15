@@ -1,0 +1,37 @@
+:root {
+	--dark-color-primary: #667aff;
+	--dark-color-secondary: #7386ff;
+	--light-color: #e6e9ff;
+	--success-color: #5cb85c;
+	--error-color: #d9534f;
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: 'DM Mono', sans-serif;
+	font-size: 16px;
+	background: var(--light-color);
+	margin: 20px;
+}
+
+ul {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+}
+
+.btn {
+	cursor: pointer;
+	padding: 5px 15px;
+	background: var(--light-color);
+	color: var(--dark-color-primary);
+	border: 0;
+	font-size: 17px;
+}
